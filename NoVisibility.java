@@ -2,7 +2,7 @@ import java.io.*;
 public class NoVisibility{
 	private static boolean ready;
 	private static int number;
-	private class ReaderThread extends Thread{
+	private static class ReaderThread extends Thread{
 		public void run(){
 			while(!ready)
 				System.yield();
