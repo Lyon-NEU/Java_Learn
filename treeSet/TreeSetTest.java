@@ -6,6 +6,7 @@ package treeSet;
 import java.util.*;
 /**
  *This program sorts a set of item by comparing therir descritions
+ * inner class  Comparator
  */
 public class TreeSetTest{
 	SortedSet<Item>parts=new TreeSet<>();
