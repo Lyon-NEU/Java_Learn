@@ -3,6 +3,8 @@ import java.util.*;
 
 /**
  *An item with a description and a part number
+ * compareTo(Object o)方法是java.lang.Comparable<T>接口中的方法，when need to sort object, 
+ * the object must implements Comparable<T> , and override public int compareTo(T obj)
  */
 public class Item implements Comparable<Item>{
 	private String description;
