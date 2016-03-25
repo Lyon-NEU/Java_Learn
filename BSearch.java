@@ -12,7 +12,7 @@ public class BSearch{
 		int i=0;
 		int j=arr.length-1;
 		int mid;
-		while(i<j){
+		while(i<=j){
 			mid=(i+j)/2;
 			if(key>arr[mid])
 				i=mid+1;
