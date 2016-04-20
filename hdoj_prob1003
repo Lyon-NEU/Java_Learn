@@ -1,0 +1,64 @@
+package algorithm;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+
+public class MaxSum {
+	public static int max_sum(String []arr,int cases){
+		if(arr==null)
+			return -1;
+		int sum=0;
+		int b=0;
+		int start=1;
+		int end=1;
+		for(int i=1;i<arr.length;i++){
+			if(b<0){
+				b=Integer.valueOf(arr[i]);
+				start=i;
+				end=start;
+			}
+			else{
+				b+=Integer.valueOf(arr[i]);
+			}
+			if(sum<b){
+				sum=b;
+				end=i;
+			}
+		}
+		System.out.println("Case "+cases+":");
+		System.out.println(sum+" "+start+" "+end);
+		return sum;
+	}
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		BufferedReader in = null;
+		try {
+			in=new BufferedReader(new FileReader(new File("sum.txt")));
+			String line;
+			int cases=0;
+			line=in.readLine();
+			if(line!=null){
+				cases=Integer.valueOf(line);
+			}
+			int i=1;
+			while((i<=cases)&&((line=in.readLine())!=null)){
+				max_sum(line.split(" "),i);
+				System.out.println();
+				i++;
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			try {
+				in.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+
+}
