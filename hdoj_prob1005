@@ -1,0 +1,43 @@
+package algorithm;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+
+public class NumberSequence {
+	public static int cal(int A,int B,int n){
+		if(n<=0)
+			return 0;
+		if(n==1||n==2)
+			return 1;
+		else
+			return (A*cal(A,B,n-1)+B*cal(A,B,n-2))%7;
+	}
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		BufferedReader in = null;
+		try{
+			in=new BufferedReader(new FileReader(new File("num.txt")));
+			String line;
+			while((line=in.readLine())!=null){
+				String[]coef=line.split(" ");
+				if(coef.length!=3)
+					continue;
+				int a=Integer.valueOf(coef[0]);
+				int b=Integer.valueOf(coef[1]);
+				int n=Integer.valueOf(coef[2]);
+				System.out.println(cal(a,b,n));
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			try{
+				in.close();
+			}catch(IOException e){
+				e.printStackTrace();
+			}
+		}
+	}
+
+}
