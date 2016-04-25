@@ -1,0 +1,30 @@
+package algorithm;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.Scanner;
+
+public class DigitalRoot {
+	public static int root(int n){
+		if(n>=0&&n<10)
+			return n;
+		while(n>=10){		
+			//计算各位数字之各
+			int tmp=0;
+			while(n>0){
+				tmp+=n%10;
+				n/=10;
+			}
+			n=tmp;
+			tmp=0;
+		}
+		return n;
+	}
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner in=new Scanner(new BufferedReader(new InputStreamReader(System.in)));
+		int n=in.nextInt();
+		System.out.println(root(n));
+	}
+
+}
