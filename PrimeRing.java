@@ -1,5 +1,7 @@
 package algorithm;
 
+
+import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Scanner;
 
@@ -10,10 +12,7 @@ import java.util.Scanner;
 
 
 public class PrimeRing {
-	public static  int n;
 	private static int Primes[]={2,3,5,7,11,13,17,19,23,29,31,37};
-	private static int arr[]=new int[20];
-	private static boolean visited[]=new boolean[20];
 	public static void Print(int[]arr){
 		for(int a:arr)
 			System.out.print(a+" ");
@@ -34,7 +33,7 @@ public class PrimeRing {
 		return true;
 	}
 	public static boolean is_prime(int a){
-		for(int i=0;a<Primes.length;i++)
+		for(int i=0;i<Primes.length;i++)
 			if(a==Primes[i])
 				return true;
 		return false;	
@@ -44,25 +43,34 @@ public class PrimeRing {
 	 * @param start 
 	 * @param end
 	 */
-	public static void dfs(int cur){
-		if(cur==n){
+	public static void dfs(int cur,int []arr,boolean[]visited){
+		if(cur==arr.length-1){
 			if(is_prime(arr[cur]+arr[0]))  //search end
 				Print(arr);
 			return;
 		}
-		for(int i=2;i<arr.length;i++){
-	        if (!visited[i]&& is_prime(i+arr[cur])){
-	            arr[cur] = i;
-	            visited[i] = true;
-	            dfs(cur+1);
-	            visited[i] = false;  //reset for trace back
+		for(int i=2;i<=arr.length;i++){
+	        if (!visited[i-1]&& is_prime(i+arr[cur])){
+	            arr[cur+1] = i;
+	            visited[i-1] = true;
+	            dfs(cur+1,arr,visited);
+	            visited[i-1] = false;  //reset for trace back
 	        }
 		}
 	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Scanner in=new Scanner(new InputStreamReader(System.in));
+		Scanner in=new Scanner(new BufferedReader(new InputStreamReader(System.in)));
 		int n=in.nextInt();
-		dfs(2);
+		int arr[]=new int[n];
+		boolean []visited=new boolean[n];
+		arr[0]=1;
+		visited[0]=true;
+		for(int i=1;i<n;i++){
+			arr[i]=i+1;
+			visited[i]=false;
+		}
+		dfs(0,arr,visited);
 	}
 }
+
