@@ -1,0 +1,29 @@
+package algorithm;
+/**
+ * 字符串循环移位
+ * @author Lyon
+ * @date 2016/05/02
+ */
+public class StrReverse {
+	//反转str的第s-e位,String是传值，不会改变原先的值
+	public static String reverse(String str){
+		if(str==null)
+			return str;
+		StringBuilder sb=new StringBuilder(str);
+		sb=sb.reverse();
+		return sb.toString();
+	}
+	public static void shift(String str,int n){
+		String s1=reverse(str.substring(0,n));
+		String s2=reverse(str.substring(n));
+		String s=reverse(s1+s2);
+		System.out.println(s);
+	}
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		String str="abcdefgh";
+		shift(str,3);
+		//str=reverse(str,0,str.length()-1);
+		System.out.println(str);
+	}
+}
