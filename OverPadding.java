@@ -51,12 +51,14 @@ public class OverPadding {
 				tmp.setY(cur.getY());
 				while((i<nodes.size())&&(nodes.get(i).getX()==cur.getY())){
 					tmp.setY(nodes.get(i).getY());
+					cur=nodes.get(i);
 					i++;
 				}
 				sortedNode.add(tmp);
-				cur=nodes.get(i);
-				if(i<nodes.size())
-					i++;		
+				if(i<nodes.size()){
+					cur=nodes.get(i);
+					i++;
+				}
 			}
 		}
 		return sortedNode;
