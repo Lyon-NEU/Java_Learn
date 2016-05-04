@@ -39,27 +39,22 @@ class Node{
 	}
 }
 public class OverPadding {
-	//合并排序后的区间
 	public static List<Node> mergeInterval(List<Node> nodes){
 		List<Node>sortedNode=new ArrayList<>();
 		if(nodes.size()>1){
 			Node cur=nodes.get(0);
 			int i=1;
 			while(i<nodes.size()){
-				Node tmp=new Node();
-				tmp.setX(cur.getX());
-				tmp.setY(cur.getY());
-				while((i<nodes.size())&&(nodes.get(i).getX()==cur.getY())){
-					tmp.setY(nodes.get(i).getY());
-					cur=nodes.get(i);
-					i++;
+				if(nodes.get(i).getX()==cur.getY()){
+					cur.setY(nodes.get(i).getY());	
 				}
-				sortedNode.add(tmp);
-				if(i<nodes.size()){
+				else{
+					sortedNode.add(cur);
 					cur=nodes.get(i);
-					i++;
-				}
+				}	
+				i++;
 			}
+			sortedNode.add(cur);  //最后一个区间
 		}
 		return sortedNode;
 	}
