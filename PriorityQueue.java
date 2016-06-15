@@ -24,7 +24,35 @@ private void shiftUp(int k,E x){
 	}
 	queue[k]=x;
 }
+public E poll(){
+	if(size==0)
+		return null;
+	int s=--size;
+	modCount++;
+	E result=(E)queue[0];
+	E x=(E)queue[s];
+	queue[s]=null;
+	if(s!=0)
+		shiftDown(0,x);
+	return result;
+}
 
+private void shiftDown(int k,E x){
+	int half=size>>>1;
+	while(k<half){
+		int child=(k<<1)+1;  //leftNo=parentNo*2+1
+		Object c=queue[child];
+		int right=child+1;
+		if(right<size &&
+			comparator.compare((E)c,(E) queue[right])>0)
+			c=queue[child=right];
+		if(comparator.compare(x,(E) c)<=0)
+			break;
+		queue[k]=c;
+		k=child;
+	}
+	queue[k]=x;
+}
 public E peek(){
 	if(size==0)
 		return null;
