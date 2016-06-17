@@ -40,15 +40,15 @@ class WaitingTask implements Runnable{
 			System.out.println(this+" interrupted");
 		}
 	}
-	public Stirng toString(){
+	public String toString(){
 		return String.format("WaitingTask %1$-3d",id);
 	}
 }
 public class CountDownLatchDemo{
 	static final int SIZE=100;
 	public static void main(String[]args)throws Exception{
-		ExecutorService exec=ExecutorService.newCachedThreadPool();
-		CountDownLatch latch=new CountDownLatch(SIZW);
+		ExecutorService exec=Executors.newCachedThreadPool();
+		CountDownLatch latch=new CountDownLatch(SIZE);
 		for(int i=0;i<10;i++)
 			exec.execute(new WaitingTask(latch));
 		for(int i=0;i<SIZE;i++)
