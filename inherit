@@ -1,0 +1,60 @@
+对于子类而已,其构造器的正确初始化是非常重要的,而且当且仅当只有一个方法可以保证这点：
+在构造器中调用父类构造器来完成初始化，而父类构造器具有执行父类初始化所需要的所有知识和能力。
+public class Person {
+    protected String name;
+    protected int age;
+    protected String sex;
+ 
+    Person(){
+        System.out.println("Person Constrctor...");
+    }
+}
+ 
+public class Husband extends Person{
+    private Wife wife;
+ 
+    Husband(){
+        System.out.println("Husband Constructor...");
+    }
+ 
+    public static void main(String[] args) {
+        Husband husband  = new Husband();
+    }
+}
+ 
+Output:
+Person Constrctor...
+Husband Constructor...
+通过这个示例可以看出，构建过程是从父类“向外”扩散的，也就是从父类开始向子类一级一级地完成构建。
+而且我们并没有显示的引用父类的构造器，这就是java的聪明之处：编译器会默认给子类调用父类的构造器。
+
+但是，这个默认调用父类的构造器是有前提的：父类有默认构造器。
+如果父类没有默认构造器，我们就要必须显示的使用super()来调用父类构造器，否则编译器会报错：无法找到符合父类形式的构造器。
+public class Person {
+    protected String name;
+    protected int age;
+    protected String sex;
+ 
+    Person(String name){
+        System.out.println("Person Constrctor-----" + name);
+    }
+}
+ 
+public class Husband extends Person{
+    private Wife wife;
+ 
+    Husband(){
+        super("chenssy");
+        System.out.println("Husband Constructor...");
+    }
+ 
+    public static void main(String[] args) {
+        Husband husband  = new Husband();
+    }
+}
+ 
+Output:
+Person Constrctor-----chenssy
+Husband Constructor...
+所以综上所述：对于继承而已，子类会默认调用父类的构造器，但是如果没有默认的父类构造器，
+子类必须要显示的指定父类的构造器，而且必须是在子类构造器中做的第一件事(第一行代码)。
